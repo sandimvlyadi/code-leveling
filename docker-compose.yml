@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: magic-portfolio:latest
-    container_name: magic-portfolio
+    image: code-leveling-app:latest
+    container_name: code-leveling-app
     restart: unless-stopped
     pull_policy: build
     ports:
@@ -13,9 +13,3 @@ services:
       - .env.production
     environment:
       - NODE_ENV=production
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/check-auth"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s

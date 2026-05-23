@@ -30,7 +30,6 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 RUN apk add --no-cache dumb-init && \
-    npm install -g pm2 && \
     addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
@@ -39,12 +38,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
-# Copy PM2 ecosystem config
-COPY --chown=nextjs:nodejs ecosystem.config.js ./
-
 USER nextjs
 
 EXPOSE 3000
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+CMD ["node", "server.js"]

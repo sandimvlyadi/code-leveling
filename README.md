@@ -6,39 +6,96 @@ View the demo [here](https://demo.magic-portfolio.com).
 
 ![Magic Portfolio](public/images/og/home.jpg)
 
-## Getting started
+## Getting started for local machine
 
 **1. Clone the repository**
 ```
-git clone https://github.com/once-ui-system/magic-portfolio.git
+git clone https://github.com/sandimvlyadi/code-leveling.git
 ```
 
-**2. Install dependencies**
+**2. Copy .env.example and add your `GEMINI_API_KEY`**
+```
+cp .env.example .env.local
+```
+
+**3. Install dependencies**
 ```
 npm install
 ```
 
-**3. Run dev server**
+**4. Run dev server**
 ```
 npm run dev
 ```
 
-**4. Edit config**
+**5. Edit config**
 ```
 src/resources/once-ui.config.js
 ```
 
-**5. Edit content**
+**6. Edit content**
 ```
 src/resources/content.js
 ```
 
-**6. Create blog posts / projects**
+**7. Create blog posts / projects**
 ```
 Add a new .mdx file to src/app/blog/posts or src/app/work/projects
 ```
 
 Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+
+## Run on Docker
+
+**1. Clone the repository**
+```
+git clone https://github.com/sandimvlyadi/code-leveling.git
+```
+
+**2. Copy .env.example and add your `GEMINI_API_KEY`**
+```
+cp .env.example .env.production
+```
+
+**3. Run on docker**
+```
+docker compose up -d --build
+```
+
+**4. Edit port on `docker-compose.yml`**
+
+## Run on PM2
+
+**1. Clone the repository**
+```
+git clone https://github.com/sandimvlyadi/code-leveling.git
+```
+
+**2. Copy .env.example and add your `GEMINI_API_KEY`**
+```
+cp .env.example .env.production
+```
+
+**3. Install dependencies**
+```
+npm install
+```
+
+**4. Build app**
+```
+npm run build
+```
+
+**3. Run on PM2**
+```
+pm2 start npm --name code-leveling-app -- start -- -H 0.0.0.0 --port 3000
+```
+or
+```
+pm2 start ecosystem.config.js
+```
+
+**4. Edit port on `ecosystem.config.js`**
 
 ## Documentation
 
