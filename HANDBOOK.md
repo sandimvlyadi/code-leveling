@@ -537,21 +537,16 @@ module.exports = {
       name: "portfolio-[PORT]",        // contoh: portfolio-3001
       script: "npm",
       args: "start",
-      cwd: "/home/[USERNAME]/portfolio-[PORT]",  // path lengkap direktorimu
-      env_production: {
+      instances: 1,
+      exec_mode: "fork",
+      env: {
         NODE_ENV: "production",
         PORT: [PORT]                   // contoh: 3001
+        HOSTNAME: "0.0.0.0",
       },
-      watch: false,
-      instances: 1,
-      autorestart: true,
-      max_memory_restart: "300M",
-      error_file: "/home/[USERNAME]/portfolio-[PORT]/logs/err.log",
-      out_file: "/home/[USERNAME]/portfolio-[PORT]/logs/out.log",
-      log_date_format: "YYYY-MM-DD HH:mm:ss"
-    }
-  ]
-}
+    },
+  ],
+};
 ```
 
 Contoh untuk peserta dengan port 3001 dan username `sandimulyadi`:
@@ -560,24 +555,19 @@ Contoh untuk peserta dengan port 3001 dan username `sandimulyadi`:
 module.exports = {
   apps: [
     {
-      name: "portfolio-3001",
+      name: "portfolio-3001",        // contoh: portfolio-3001
       script: "npm",
       args: "start",
-      cwd: "/home/sandimulyadi/portfolio-3001",
-      env_production: {
-        NODE_ENV: "production",
-        PORT: 3001
-      },
-      watch: false,
       instances: 1,
-      autorestart: true,
-      max_memory_restart: "300M",
-      error_file: "/home/sandimulyadi/portfolio-3001/logs/err.log",
-      out_file: "/home/sandimulyadi/portfolio-3001/logs/out.log",
-      log_date_format: "YYYY-MM-DD HH:mm:ss"
-    }
-  ]
-}
+      exec_mode: "fork",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3001                   // contoh: 3001
+        HOSTNAME: "0.0.0.0",
+      },
+    },
+  ],
+};
 ```
 
 Buat direktori logs:
@@ -589,7 +579,7 @@ mkdir -p logs
 ### 9.4 Jalankan Aplikasi dengan PM2
 
 ```bash
-pm2 start ecosystem.config.js --env production
+pm2 start ecosystem.config.js
 ```
 
 ### 9.5 Simpan Konfigurasi PM2
@@ -899,7 +889,7 @@ Berikut adalah perintah-perintah PM2 yang paling sering digunakan:
 
 ```bash
 # Menjalankan aplikasi dari ecosystem config
-pm2 start ecosystem.config.js --env production
+pm2 start ecosystem.config.js
 
 # Melihat semua proses yang berjalan
 pm2 list
